@@ -1,0 +1,2 @@
+javac -d bin src\celeryroot\*.java src\celeryroot\celery\*.java src\celeryroot\celery\config\*.java src\celeryroot\game\*.java src\celeryroot\game\collision\*.java src\celeryroot\game\entities\*.java src\celeryroot\game\inputs\*.java src\celeryroot\game\map\*.java src\celeryroot\util\*.java
+jar cfvm celery.jar src\manifest.txt -C bin .
