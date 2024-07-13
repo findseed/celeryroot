@@ -75,16 +75,18 @@ public class Map {
                 }
             }
             else if(Objects.equals(belement.name, "Filler")){ //captial F jumpscare process all the filler(necessary? prolly not?)
-                for(BinElement fillerData : belement.children){
-                    int minX = fillerData.getIntAttr("x", 0);
-                    int minY = fillerData.getIntAttr("y", 0);
-                    int maxX = minX + fillerData.getIntAttr("w", 0);
-                    int maxY = minY + fillerData.getIntAttr("h", 0);
-                    if(minX < mapMinX) mapMinX = minX;
-                    if(minY < mapMinY) mapMinY = minY;
-                    if(maxX > mapMaxX) mapMaxX = maxX;
-                    if(maxY > mapMaxY) mapMaxY = maxY;
-                    filler.add(new Recti(minX, minY, maxX, maxY));
+                if(belement.children != null) {
+                    for (BinElement fillerData : belement.children) {
+                        int minX = fillerData.getIntAttr("x", 0);
+                        int minY = fillerData.getIntAttr("y", 0);
+                        int maxX = minX + fillerData.getIntAttr("w", 0);
+                        int maxY = minY + fillerData.getIntAttr("h", 0);
+                        if (minX < mapMinX) mapMinX = minX;
+                        if (minY < mapMinY) mapMinY = minY;
+                        if (maxX > mapMaxX) mapMaxX = maxX;
+                        if (maxY > mapMaxY) mapMaxY = maxY;
+                        filler.add(new Recti(minX, minY, maxX, maxY));
+                    }
                 }
             }
         }

@@ -270,12 +270,12 @@ public class InputUtil {
                                 pw.print("," + (lastYAxis == 1 ? DOWN_KEY : UP_KEY));
                             if(lastJump)
                                 pw.print("," + (altJump ? JUMP_KEY1 : JUMP_KEY0));
-                            if(lastGrab)
-                                pw.print("," + (altGrab ? GRAB_KEY1 : GRAB_KEY0));
-                            if(lastDash)
-                                pw.print("," + (altDash ? DASH_KEY1 : DASH_KEY0));
                             if(lastCDash)
                                 pw.print("," + (altCDash ? CDASH_KEY1 : CDASH_KEY0));
+                            if(lastDash)
+                                pw.print("," + (altDash ? DASH_KEY1 : DASH_KEY0));
+                            if(lastGrab)
+                                pw.print("," + (altGrab ? GRAB_KEY1 : GRAB_KEY0));
                             pw.print('\n');
                         }
                         lastXAxis = curXAxis;
@@ -337,8 +337,10 @@ public class InputUtil {
         for(short s : inputs){
             InputUtil.applyInput(game.inputs, s);
             game.tick();
-            if(game.time == 67)
-                System.out.println("!");
+            if(Config.trimBranch(game))
+                System.out.println("TRIMMED!");
+            if(Config.goalCondition(game))
+                System.out.println("COMPLETED!");
             System.out.println(game.time + " - " + game.player);
         }
     }

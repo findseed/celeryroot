@@ -77,8 +77,8 @@ public class Player {
 
     //dashing
     public float dashCoolDownTimer;
-    private float dashAttackTimer;
-    private float dashRefillCooldownTimer;
+    public float dashAttackTimer;
+    public float dashRefillCooldownTimer;
     public int totalDashes = 0;
     public int dashes = 1;
     public int maxDashes = 1;
@@ -721,15 +721,17 @@ public class Player {
                 return;
             }
             //hor dash only try snap over corners to avoid collision. iterates outwards swapping +- for 1-4
-            for(int yOff = 1; yOff <= 4; ++yOff){
-                for(int yOffSign = 1; yOffSign >= -1; yOffSign -= 2){
-                    int tX = x + Calc.sign(speed.x);
-                    int tY = y + yOff * yOffSign;
-                    if(!Collision.checkSolidCollision(tX, tY, hitboxSize) && //is it clear
-                            Collision.checkSolidCollision(tX, tY - yOffSign, hitboxSize)) { //hugging the corner? idk why
-                        moveYPixel(yOff * yOffSign); //gasp
-                        moveXPixel(Calc.sign(speed.x));
-                        return;
+            if(speed.y == 0f && speed.x != 0f){
+                for(int yOff = 1; yOff <= 4; ++yOff){
+                    for(int yOffSign = 1; yOffSign >= -1; yOffSign -= 2){
+                        int tX = x + Calc.sign(speed.x);
+                        int tY = y + yOff * yOffSign;
+                        if(!Collision.checkSolidCollision(tX, tY, hitboxSize) && //is it clear
+                                Collision.checkSolidCollision(tX, tY - yOffSign, hitboxSize)) { //hugging the corner? idk why
+                            moveYPixel(yOff * yOffSign); //gasp
+                            moveXPixel(Calc.sign(speed.x));
+                            return;
+                        }
                     }
                 }
             }
